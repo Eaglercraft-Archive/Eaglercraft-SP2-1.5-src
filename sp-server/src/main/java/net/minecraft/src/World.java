@@ -2152,8 +2152,11 @@ public abstract class World implements IBlockAccess {
 			var4 = MathHelper.floor_double(var2.posZ / 16.0D);
 			int var5 = 7;
 
-			if(var2.renderDistance < var5) {
+			if(var2.renderDistance - 1 < var5) {
 				var5 = var2.renderDistance - 1;
+				if(var5 < 1) {
+					var5 = 1;
+				}
 			}
 			
 			for (int var6 = -var5; var6 <= var5; ++var6) {

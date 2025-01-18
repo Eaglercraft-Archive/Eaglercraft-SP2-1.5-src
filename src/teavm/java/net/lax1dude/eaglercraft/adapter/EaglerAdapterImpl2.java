@@ -479,16 +479,16 @@ public class EaglerAdapterImpl2 {
 		void openFileChooser(String ext, String mime);
 
 		@JSProperty
-		ArrayBuffer getGetFileChooserResult();
+		ArrayBuffer getFileChooserResult();
 
 		@JSProperty
-		void setGetFileChooserResult(ArrayBuffer val);
+		void setFileChooserResult(ArrayBuffer val);
 
 		@JSProperty
-		String getGetFileChooserResultName();
+		String getFileChooserResultName();
 
 		@JSProperty
-		void setGetFileChooserResultName(String str);
+		void setFileChooserResultName(String str);
 
 	}
 
@@ -502,21 +502,22 @@ public class EaglerAdapterImpl2 {
 			"el.addEventListener(\"change\", function(evt){\r\n" + 
 			"var f = ret.inputElement.files;\r\n" + 
 			"if(f.length == 0){\r\n" + 
-			"ret.getFileChooserResult = null;\r\n" + 
+			"ret.fileChooserResult = null;\r\n" + 
 			"}else{\r\n" + 
-			"f[0].arrayBuffer().then(function(res) {\r\n" + 
-			"ret.getFileChooserResult = res;\r\n" + 
-			"ret.getFileChooserResultName = f[0].name;\r\n" + 
+			"ret.fileChooserResult = null;\r\n" + 
+			"ret.fileChooserResultName = null;\r\n" + 
+			"var phile = f[0];\r\n" +
+			"phile.arrayBuffer().then(function(res) {\r\n" + 
+			"ret.fileChooserResult = res;\r\n" + 
+			"ret.fileChooserResultName = phile.name;console.log(ret);\r\n" + 
 			"});\r\n" + 
 			"}\r\n" + 
 			"});\r\n" + 
-			"ret.getFileChooserResult = null;\r\n" + 
-			"ret.getFileChooserResultName = null;\r\n" + 
 			"el.accept = \".\" + ext;\r\n" +
 			"el.click();\r\n" + 
 			"},\r\n" + 
-			"getFileChooserResult: null,\r\n" + 
-			"getFileChooserResultName: null\r\n" + 
+			"fileChooserResult: null,\r\n" + 
+			"fileChooserResultName: null\r\n" + 
 			"}; return ret;")
 	private static native EagsFileChooser initFileChooser();
 	
@@ -2157,7 +2158,7 @@ public class EaglerAdapterImpl2 {
 	}
 	
 	public static final boolean getFileChooserResultAvailable() {
-		return fileChooser.getGetFileChooserResult() != null;
+		return fileChooser.getFileChooserResult() != null;
 	}
 	
 	public static final byte[] getFileChooserResult() {
@@ -2171,13 +2172,13 @@ public class EaglerAdapterImpl2 {
 	}
 
 	private static final ArrayBuffer getFileChooserResult0() {
-		ArrayBuffer ret = fileChooser.getGetFileChooserResult();
-		fileChooser.setGetFileChooserResultName(null);
+		ArrayBuffer ret = fileChooser.getFileChooserResult();
+		fileChooser.setFileChooserResult(null);
 		return ret;
 	}
 
 	public static final String getFileChooserResultName() {
-		return fileChooser.getGetFileChooserResultName();
+		return fileChooser.getFileChooserResultName();
 	}
 
 	public static final void setListenerPos(float x, float y, float z, float vx, float vy, float vz, float pitch, float yaw) {

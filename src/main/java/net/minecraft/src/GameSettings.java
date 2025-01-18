@@ -470,7 +470,10 @@ public class GameSettings {
 													: (par1EnumOptions == EnumOptions.CHAT_HEIGHT_FOCUSED ? var3 + GuiNewChat.func_96130_b(var5) + "px"
 															: (par1EnumOptions == EnumOptions.CHAT_WIDTH ? var3 + GuiNewChat.func_96128_a(var5) + "px"
 																	: (var5 == 0.0F ? var3 + var2.translateKey("options.off") : var3 + (int) (var5 * 100.0F) + "%")))))));
-		} else if (par1EnumOptions.getEnumBoolean()) {
+		} else if (EaglerAdapter.isWebGL && par1EnumOptions == EnumOptions.VSYNC) {
+			boolean var4 = this.getOptionOrdinalValue(par1EnumOptions);
+			return var4 ? var3 + var2.translateKey("options.on") : EnumChatFormatting.RED + var3 + var2.translateKey("options.off");
+		} if (par1EnumOptions.getEnumBoolean()) {
 			boolean var4 = this.getOptionOrdinalValue(par1EnumOptions);
 			return var4 ? var3 + var2.translateKey("options.on") : var3 + var2.translateKey("options.off");
 		} else {

@@ -2342,7 +2342,10 @@ public abstract class World implements IBlockAccess {
 			var2 = (EntityPlayer) this.playerEntities.get(var1);
 			var3 = MathHelper.floor_double(var2.posX / 16.0D);
 			var4 = MathHelper.floor_double(var2.posZ / 16.0D);
-			byte var5 = 7;
+			byte var5 = (byte)(getRenderDistanceChunks() - 1);
+			if(var5 < 1) {
+				var5 = 1;
+			}
 
 			for (int var6 = -var5; var6 <= var5; ++var6) {
 				for (int var7 = -var5; var7 <= var5; ++var7) {
@@ -2364,6 +2367,8 @@ public abstract class World implements IBlockAccess {
 			this.updateAllLightTypes(var3, var4, var8);
 		}
 	}
+
+	protected abstract int getRenderDistanceChunks();
 
 	protected void moodSoundAndLightCheck(int par1, int par2, Chunk par3Chunk) {
 		Minecraft mc = Minecraft.getMinecraft();

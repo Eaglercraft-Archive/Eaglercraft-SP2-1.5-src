@@ -376,4 +376,17 @@ public class WorldClient extends World {
 	static Set getEntitySpawnQueue(WorldClient par0WorldClient) {
 		return par0WorldClient.entitySpawnQueue;
 	}
+
+	protected int getRenderDistanceChunks() {
+		int var2 = 64 << 3 - mc.gameSettings.renderDistance;
+		if(var2 > 400) {
+			var2 = 400;
+		}
+		var2 = (var2 >> 5) + 2;
+		if (var2 > 3 && var2 < 15) {
+			return var2;
+		}else {
+			return 7;
+		}
+	}
 }
